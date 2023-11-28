@@ -1,0 +1,167 @@
+<div class="container">
+  <form class="row g-3" (ngSubmit)="addProvider()" #providerForm="ngForm">
+    <div class="row mt-3">
+      <div class="col-md-2 mt-4">
+        <label for="providerId" class="form-label">Client</label>
+        <input type="text" [(ngModel)]="clientName" name="providerId" readonly class="form-control" id="providerId">
+      </div>
+
+      <div class="col-md-3 mt-4">
+        <label for="name" class="form-label">Provider Name</label>
+        <input type="text" #name="ngModel" ngModel name="name" required class="form-control" id="name">
+        <span class="text-danger" *ngIf="!name.valid && name.touched">The
+          provider name
+          field is required</span>
+      </div>
+
+      <div class="col-md-3 mt-4">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" #address="ngModel" ngModel name="address" required class="form-control" id="address">
+        <span class="text-danger" *ngIf="!address.valid && address.touched">The
+          address
+          field is required</span>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <label>Location</label>
+          <div class="col-md-6">
+            <label for="longitude" class="form-label" style="font-size: small;">Longitude</label>
+            <input type="number" #longitude="ngModel" ngModel name="longitude" required class="form-control"
+              id="longitude">
+            <span class="text-danger" *ngIf="!longitude.valid && longitude.touched">The
+              longitude
+              field is required</span>
+          </div>
+          <div class="col-md-6">
+            <label for="latitude" class="form-label" style="font-size: small;">Latitude</label>
+            <input type="number" #latitude="ngModel" ngModel name="latitude" required class="form-control"
+              id="latitude">
+            <span class="text-danger" *ngIf="!latitude.valid && latitude.touched">The
+              latitude
+              field is required</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <label>Available Date</label>
+      <div class="col-md-5">
+        <div class="row">
+          <div class="col-md-7">
+            <label for="startDate" class="form-label" style="font-size: small;">Start Date</label>
+            <div class="input-group">
+              <input type="text" #startDate="ngModel" ngModel name="startDate" required class="form-control" readonly
+                id="startDate" [matDatepicker]="startDatePicker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+            </div>
+            <span class="text-danger" *ngIf="!startDate.valid && startDate.touched">The
+              start date
+              field is required</span>
+          </div>
+          <div class="col-md-4 p-0">
+            <label for="startTime" class="form-label" style="font-size: small;">Start Time</label>
+            <input #startTime="ngModel" ngModel name="startTime" required class="form-control"
+              placeholder="Choose a time" id="startTime" [ngxTimepicker]="startFullTime" [format]="12" readonly>
+            <ngx-material-timepicker #startFullTime></ngx-material-timepicker>
+            <span class="text-danger" *ngIf="!startTime.valid && startTime.touched">The
+              start time
+              field is required</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-5">
+        <div class="row">
+          <div class="col-md-7">
+            <label for="endDate" class="form-label" style="font-size: small;">End Date</label>
+            <div class="input-group">
+              <input type="text" #endDate="ngModel" ngModel name="endDate" required class="form-control" readonly
+                id="endDate" [matDatepicker]="endDatePicker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </div>
+            <span class="text-danger" *ngIf="!endDate.valid && endDate.touched">The
+              end date
+              field is required</span>
+          </div>
+          <div class="col-md-5 p-0">
+            <label for="endTime" class="form-label" style="font-size: small;">End Time</label>
+            <input #endTime="ngModel" ngModel name="endTime" required class="form-control" placeholder="Choose a time"
+              id="endTime" [ngxTimepicker]="endFullTime" [format]="12" readonly>
+            <ngx-material-timepicker #endFullTime></ngx-material-timepicker>
+            <span class="text-danger" *ngIf="!endTime.valid && endTime.touched">The
+              end time
+              field is required</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2" style="margin-top: 28px;">
+        <button class="btn btn-primary w-100" type="button"
+          [disabled]="!startDate.valid || !endDate.valid || !startTime.valid || !endTime.valid"
+          (click)="addAvailability()">Add Date</button>
+      </div>
+
+      <p class="mb-0 mt-1 fw-bold" style="font-size: small;">Available Dates:</p>
+      <p class="m-0 fst-italic" style="font-size: small;" *ngFor="let av of availabilities; let avi = index;">{{avi +
+        1}}. {{av.startTime | date : 'short'}} - {{av.endTime | date : 'short'}}</p>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-10">
+        <label for="service" class="form-label">Service</label>
+        <input type="text" #service="ngModel" ngModel name="service" required class="form-control" id="name">
+        <span class="text-danger" *ngIf="!service.valid && service.touched">The
+          service
+          field is required</span>
+      </div>
+      <div class="col-md-2" style="margin-top: 44px;">
+        <button type="button" class="btn btn-primary w-100" (click)="addService()" [disabled]="!service.valid">Add
+          Service</button>
+      </div>
+      <p class="mb-0 mt-1 fw-bold" style="font-size: small;">Services:</p>
+      <p class="m-0 fst-italic" style="font-size: small;" *ngFor="let service of services; let s = index;">{{s + 1}}.
+        {{service.serviceName}}</p>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary"
+        [disabled]="!name.valid || !address.valid || !longitude.valid || !latitude.valid || availabilities.length <= 0 || services.length <= 0">Add
+        Provider</button>
+    </div>
+  </form>
+
+  <div class="mt-5" *ngIf="providers.length > 0">
+    <h5>Service Providers</h5>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Location</th>
+          <th scope="col">Services Offered</th>
+          <th scope="col">Availability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sp of providers; let i = index;">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{sp.providerName}}</td>
+          <td>{{sp.address}}</td>
+          <td>{{sp.location}}</td>
+          <td>
+            <p *ngFor="let service of sp.services; let si = index;">{{si + 1}}. {{service.serviceName}}</p>
+          </td>
+          <td>
+            <p *ngFor="let av of sp.availabilities; let avi = index;">{{avi + 1}}. {{av.startTime | date: 'short'}} -
+              {{av.endTime | date: 'short'}}
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

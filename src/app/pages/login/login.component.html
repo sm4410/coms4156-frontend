@@ -1,0 +1,22 @@
+<form class="row g-3" (ngSubmit)="login()" #loginForm="ngForm">
+  <div class="col-md-12">
+    <label for="firstName" class="form-label">First Name</label>
+    <input type="text" #firstName="ngModel" ngModel name="firstName" required class="form-control" id="firstName">
+    <span class="text-danger" *ngIf="!firstName.valid && firstName.touched">The
+      first name
+      field is required</span>
+  </div>
+  <div class="col-md-12">
+    <label for="lastName" class="form-label">Last Name</label>
+    <input type="text" #lastName="ngModel" ngModel name="lastName" required class="form-control" id="lastName">
+    <span class="text-danger" *ngIf="!lastName.valid && lastName.touched">The
+      last name
+      field is required</span>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Sign in</button>
+  </div>
+
+  <p class="fst-italic mt-1">Don't have an account yet? <a class="fst-normal" routerLink="/elderlycare/signup">Sign up</a></p>
+</form>

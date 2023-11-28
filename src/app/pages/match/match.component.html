@@ -1,0 +1,55 @@
+<div class="container">
+    <form class="row g-3" (ngSubmit)="match()" #matchForm="ngForm">
+        <div class="col-md-5">
+            <label for="request" class="form-label">Health Issue</label>
+            <input type="text" #request="ngModel" ngModel name="request" required class="form-control" id="request">
+            <span class="text-danger" *ngIf="!request.valid && request.touched">The
+                health care
+                field is required</span>
+        </div>
+        <div class="col-md-5">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" #location="ngModel" ngModel name="location" required class="form-control" id="location">
+            <span class="text-danger" *ngIf="!location.valid && location.touched">The
+                location
+                field is required</span>
+        </div>
+        <div class="col-md-2 mt-5">
+            <button type="submit" class="btn btn-primary" [disabled]="!matchForm.valid">Search</button>
+        </div>
+    </form>
+
+    <div class="mt-5" *ngIf="serviceProviders.length > 0">
+        <h5>Service Providers</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Services Offered</th>
+                    <th scope="col">Availability</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let sp of serviceProviders; let i = index;">
+                    <th scope="row">{{i + 1}}</th>
+                    <td><a routerLink="/elderlycare/home/service-provider/{{sp.id}}">{{sp.providerName}}</a></td>
+                    <td>{{sp.location}}</td>
+                    <td>
+                        <p *ngFor="let service of sp.services; let si = index;">{{si + 1}}. {{service.serviceName}}</p>
+                    </td>
+                    <td>
+                        <p *ngFor="let av of sp.availabilities; let avi = index;">{{avi + 1}}. {{av.startTime | date: 'short'}} - {{av.endTime | date: 'short'}}
+                        </p>
+                    </td>
+                    <td>
+                        <button (click)="makeRequest(sp)" class="btn btn-primary btn-sm">Make Request</button> |
+                        <button (click)="bookAppointment(sp)" class="btn btn-success btn-sm">Book Appointment</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="container">
+  <form class="row g-3" (ngSubmit)="makeRequest()" #requestForm="ngForm">
+    <div class="col-md-12">
+      <label for="providerId" class="form-label">Provider</label>
+      <input type="text" [(ngModel)]="providerName" name="providerId" readonly class="form-control" id="providerId">
+    </div>
+
+    <div class="row mt-3">
+      <label>Request Date</label>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="startDate" class="form-label" style="font-size: small;">Start Date</label>
+            <div class="input-group">
+              <input type="text" #startDate="ngModel" ngModel name="startDate" required class="form-control" readonly
+                id="startDate" [matDatepicker]="startDatePicker" [matDatepickerFilter]="availabilityFilter"
+                placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+            </div>
+            <span class="text-danger" *ngIf="!startDate.valid && startDate.touched">The
+              start date
+              field is required</span>
+          </div>
+          <div class="col-md-4 p-0">
+            <label for="startTime" class="form-label" style="font-size: small;">Start Time</label>
+            <input #startTime="ngModel" ngModel name="startTime" required class="form-control" placeholder="Choose a time"
+            id="startTime" [ngxTimepicker]="startFullTime" [format]="12" readonly>
+            <ngx-material-timepicker #startFullTime></ngx-material-timepicker>
+            <span class="text-danger" *ngIf="!startTime.valid && startTime.touched">The
+              start time
+              field is required</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="endDate" class="form-label" style="font-size: small;">End Date</label>
+            <div class="input-group">
+              <input type="text" #endDate="ngModel" ngModel name="endDate" required class="form-control" readonly
+                id="endDate" [matDatepicker]="endDatePicker" [matDatepickerFilter]="availabilityFilter"
+                placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </div>
+            <span class="text-danger" *ngIf="!endDate.valid && endDate.touched">The
+              end date
+              field is required</span>
+          </div>
+          <div class="col-md-4 p-0">
+            <label for="endTime" class="form-label" style="font-size: small;">End Time</label>
+            <input #endTime="ngModel" ngModel name="endTime" required class="form-control" placeholder="Choose a time"
+            id="endTime" [ngxTimepicker]="endFullTime" [format]="12" readonly>
+            <ngx-material-timepicker #endFullTime></ngx-material-timepicker>
+            <span class="text-danger" *ngIf="!endTime.valid && endTime.touched">The
+              end time
+              field is required</span>
+          </div>
+        </div>
+      </div>
+    <p class="mb-0 mt-1 fw-bold" style="font-size: small;">Available Dates:</p>
+    <p class="m-0 fst-italic" style="font-size: small;"
+      *ngFor="let av of serviceProvider?.availabilities; let avi = index;">{{avi + 1}}. {{av.startTime | date: 'short'}} - {{av.endTime | date: 'short'}}</p>
+    </div>
+
+    <div class="col-md-12">
+      <label for="serviceType" class="form-label">Service Type</label>
+      <select id="serviceType" #serviceType="ngModel" class="form-select" name="serviceType" required
+        ngModel>
+        <option *ngFor="let service of serviceProvider?.services">{{service.serviceName}}</option>
+      </select>
+      <span class="text-danger" *ngIf="!serviceType.valid && serviceType.touched">The
+        service type
+        field is required</span>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary" [disabled]="!requestForm.valid">Make Request</button>
+    </div>
+  </form>
+</div>

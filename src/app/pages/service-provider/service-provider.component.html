@@ -1,0 +1,35 @@
+<h4>{{serviceProvider.providerName}} Service Provider</h4>
+
+<div class="mt-4 card" style="margin-top: 5px;">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-2">
+        <p>Location:</p>
+      </div>
+      <div class="col-10">
+        <p>123 NY, USA</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <p>Services Offered:</p>
+      </div>
+      <div class="col-10">
+        <p *ngFor="let service of serviceProvider.services; let si = index;">{{si + 1}}. {{service}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <p>Availability:</p>
+      </div>
+      <div class="col-10">
+        <p *ngFor="let av of serviceProvider.availabilities; let avi = index;">{{avi + 1}}. {{av.startTime}} - {{av.endTime}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
+  <button (click)="makeRequest()" class="btn btn-primary">Make Request</button> |
+  <button (click)="bookAppointment()"  class="btn btn-success">Book Appointment</button>
+</div>

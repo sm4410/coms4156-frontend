@@ -1,0 +1,40 @@
+<div class="container">
+    <h2>Manage Clients</h2>
+    <form class="row g-3" (ngSubmit)="saveClient()" #clientForm="ngForm">
+        <div class="col-md-5">
+            <label for="name" class="form-label">Client Name</label>
+            <input type="text" #name="ngModel" ngModel name="name" required class="form-control" id="name">
+            <span class="text-danger" *ngIf="!name.valid && name.touched">The
+                name
+                field is required</span>
+        </div>
+        <div class="col-md-2 mt-5">
+            <button type="submit" class="btn btn-primary" [disabled]="!clientForm.valid">Save</button>
+        </div>
+    </form>
+
+    <div class="mt-5" *ngIf="clients.length > 0">
+        <h3>All Clients</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients; let i = index;">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{client.clientId}}</td>
+                    <td>{{client.clientName}}</td>
+                    <td>
+                        <button (click)="addServiceProviders(client)" class="btn btn-success btn-sm">Add Service Providers</button> |
+                        <button (click)="delete(client)" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -20,7 +20,21 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Instructions for running end-to-end tests: 
+1. Start the service [here](https://github.com/chrischang314/coms4156) on the local machine 
+2. Run the GET /clients request and take note of existing clients
+3. Start the client app on the local machine (using `ng serve`)
+4. Access the client app via localhost:4200
+5. Click on the ElderlyCare option
+6. Run the GET /clients request and check if ElderlyCare client has been added
+7. Click on the Sign Up button and create a new Consumer account
+8. Run the GET /clients request and check if consumer was being added
+9. Click on the Sign Out button. 
+10. Click on the Service Provider option
+11. Click on the Add Service Providers button
+12. In this page, create a serviceProvider, add some availability and services and click Add Provider once finished
+13. Run the GET /clients request and check if serviceProvider was added
+A version of the instructions with screenshots can be found [here](https://docs.google.com/document/d/13FU8n8ozLavJvCpX823Ug_TVaf26Wcm1KLcg7UYjDoc/edit?usp=sharing)
 
 ## Further help
 

@@ -25,19 +25,19 @@ export class MatchComponent {
       {
         id: 1,
         parentClientId: 1,
-        providerName: "NY Elderly",
+        providerName: "TestHospital1",
         address: "New York",
-        location: [5,6],
+        location: [2,2],
         services: [
           {
             id: 1,
             providerId: 1,
-            serviceName: 'Walk'
+            serviceName: 'Service1'
           },
           {
             id: 2,
             providerId: 1,
-            serviceName: 'Give meds'
+            serviceName: 'Service2'
           }
         ],
         availabilities: [
@@ -54,19 +54,19 @@ export class MatchComponent {
       {
         id: 2,
         parentClientId: 1,
-        providerName: "Brooklyn Eyo",
-        address: "Washington",
-        location: [2,4],
+        providerName: "TestHospital2",
+        address: "Brooklyn",
+        location: [3,3],
         services: [
           {
             id: 3,
             providerId: 2,
-            serviceName: 'Feed'
+            serviceName: 'Service1'
           },
           {
             id: 4,
             providerId: 2,
-            serviceName: 'Bathe'
+            serviceName: 'Service2'
           }
         ],
         availabilities: [

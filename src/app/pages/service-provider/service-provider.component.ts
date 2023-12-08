@@ -17,7 +17,7 @@ export class ServiceProviderComponent {
     parentClientId: 1,
     providerName: "NY Elderly",
     address: 'New York',
-    location: [2,4],
+    location: [2,2],
     services: [
       {
         id: 1,
